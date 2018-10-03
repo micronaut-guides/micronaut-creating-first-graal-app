@@ -3,10 +3,15 @@ gettingStarted:
   requirements: What you will need
   solution: Solution
 writingTheApp: Writing the App
-application: Application
 controller: Controller
-tests: Test
-testingTheApp:
-  title: Testing the Application
-runningTheApp:
-  title: Running the Application
+service: Service
+#tests: Test
+#testingTheApp:
+#  title: Testing the Application
+#runningTheApp:
+#  title: Running the Application
+graal:
+  title: Adding Graal support
+  installGraal: Installing Graal
+  creatingGraalImage: Creating Graal native image
+nextSteps: Next steps

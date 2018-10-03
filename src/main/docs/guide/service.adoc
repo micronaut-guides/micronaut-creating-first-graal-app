@@ -1,0 +1,11 @@
+
+Create a Service:
+
+[source,java]
+.src/main/java/example/micronaut/ConferenceService.java
+----
+include::{sourceDir}/src/main/java/example/micronaut/ConferenceService.java[]
+----
+
+<1> Create a Micronaut `@Bean`
+<2> Shuffle the conferences a return the first one

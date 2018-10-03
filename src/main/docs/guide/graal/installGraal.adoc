@@ -1,0 +1,30 @@
+
+To start using GraalVM you should first install the GraalVM SDK via the
+ https://www.graalvm.org/docs/getting-started/[Getting Started] instructions or using SDKman:
+
+.Installing GraalVM 1.0.0-rc6 with SDKman
+[source,bash]
+----
+$ sdk install java 1.0.0-rc6-graal
+$ sdk use java 1.0.0-rc6-graal
+----
+
+Note the above commands install the `1.0.0-rc6` version, and may need to be altered depending on the current release
+ available.
+
+WARNING: As of this writing, GraalVM is currently only available for Linux and Mac OS X systems.
+
+Once you have installed the SDK you should make the `svm` dependency available via your local Maven cache. The easiest
+ way to do this is via Maven's `install` command:
+
+.Installing the SVM Dependency Locally
+[source,bash]
+----
+$ mvn install:install-file -Dfile=${JAVA_HOME}/jre/lib/svm/builder/svm.jar \
+                           -DgroupId=com.oracle.substratevm \
+                           -DartifactId=svm \
+                           -Dversion=GraalVM-1.0.0-rc6 \
+                           -Dpackaging=jar
+----
+
+NOTE: If you don't have Maven available you can install it using SDKMan: `sdk install maven`

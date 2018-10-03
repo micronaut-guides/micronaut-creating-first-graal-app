@@ -1,14 +1,23 @@
-In order to create a microservice that responds to "Hello World" you first need a controller.
+
+=== Create a POJO
+
+Create `Conference.java`. This is the type the controller will return and Micronaut will convert automatically to JSON
+in the respose:
+
+[source,java]
+.src/main/java/example/micronaut/Conference.java
+----
+include::{sourceDir}/src/main/java/example/micronaut/Conference.java[]
+----
 
 Create a Controller:
 
 [source,java]
-.src/main/java/example/micronaut/HelloController.java
+.src/main/java/example/micronaut/ConferenceController.java
 ----
-include::{sourceDir}/src/main/java/example/micronaut/HelloController.java[]
+include::{sourceDir}/src/main/java/example/micronaut/ConferenceController.java[]
 ----
 
-<1> The class is defined as a controller with the http://docs.micronaut.io/snapshot/api/io/micronaut/http/annotation/Controller.html[@Controller] annotation mapped to the path `/hello`
-<2> The http://docs.micronaut.io/snapshot/api/io/micronaut/http/annotation/Get.html[@Get] annotation is used to map the index method to all requests that use an HTTP GET
-<3> By default a Micronaut's response uses `application/json` as `Content-Type`. We are returning a String not a JSON object. Because of that, we set it to `text/plain`.
-<4> A String "Hello World" is returned as the result
+<1> Constructor injection
+<2> Return a `Conference`
+<3> Return a random conference from the injected service.

@@ -1,0 +1,50 @@
+When we created the application we used the `graal-native-image` feature. This feature adds three important items:
+
+- A https://github.com/micronaut-guides/micronaut-creating-first-graal-app/blob/master/complete/src/main/java/example/micronaut/MicronautSubstitutions.java[MicronautSubstitutions.java]
+ file needed to recompute Netty and Caffeine's use of `Unsafe`.
+
+- `svm` and `graal` dependencies in `build.gradle`:
+
+.build.gradle
+[source,groovy]
+----
+include::{sourceDir}/build.gradle[tag=graal]
+----
+
+- A `build-native-image.sh` bash script which can be used as a template to construct the native image.
+
+==== Creating native image
+
+To create the native image the only thing we need to do is execute the `build-native-image.sh` script. The script will
+build the application fat-jar, generate the `reflect.json` file and build the native image.
+
+.Building native image
+[source,bash]
+----
+$ ./build-native-image.sh
+----
+
+Once the native image is created we can start it:
+
+.Executing the native image
+[source,bash]
+----
+$ ./complete
+11:20:28.881 [main] INFO  io.micronaut.runtime.Micronaut - Startup completed in 14ms. Server Running: http://localhost:8080
+----
+
+We can see that the application starts in only 14ms.
+
+
+==== Sending a request
+
+You can run a few cURL requests to test the application:
+
+[source,bash]
+----
+$ curl localhost:8080/conferences/random
+{"name":"Greach"}
+
+$ curl localhost:8080/conferences/random
+{"name":"Micronaut Summit"}
+----
