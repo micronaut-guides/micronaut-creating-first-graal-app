@@ -42,9 +42,16 @@ You can run a few cURL requests to test the application:
 
 [source,bash]
 ----
-$ curl localhost:8080/conferences/random
-{"name":"Greach"}
+complete $ time curl localhost:8080/conferences/random
+{"name":"Oracle Code One"}
+real    0m0.016s
+user    0m0.005s
+sys     0m0.004s
 
-$ curl localhost:8080/conferences/random
-{"name":"Micronaut Summit"}
+complete $ time curl localhost:8080/conferences/random
+{"name":"GR8Conf EU"}
+real    0m0.014s
+user    0m0.005s
+sys     0m0.004s
+
 ----
