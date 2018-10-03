@@ -1,5 +1,4 @@
-
-Create the POJO `Conference.java`:
+Create a POJO `Conference.java`:
 
 [source,java]
 .src/main/java/example/micronaut/Conference.java
@@ -15,5 +14,5 @@ Create a Service:
 include::{sourceDir}/src/main/java/example/micronaut/ConferenceService.java[]
 ----
 
-<1> Create a Micronaut `@Bean`
-<2> Shuffle the conferences a return the first one
+<1> Use `javax.inject.Singleton` to designate a class a a singleton.
+<2> Return a random conference.
