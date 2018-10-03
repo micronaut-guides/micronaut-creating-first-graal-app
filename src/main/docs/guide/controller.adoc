@@ -8,6 +8,7 @@ Create a Controller with a method that returns a `Conference`. Micronaut will co
 include::{sourceDir}/src/main/java/example/micronaut/ConferenceController.java[]
 ----
 
-<1> Constructor injection
-<2> Return a `Conference`
-<3> Return a random conference from the injected service.
+<1> The class is defined as a controller with the `@Controller` annotation mapped to the path `/conferences`.
+<2> Constructor injection
+<3> The `@Get` annotation is used to map the index method to all requests that use an HTTP GET
+<4> Return a `Conference`.

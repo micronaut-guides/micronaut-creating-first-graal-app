@@ -3,17 +3,17 @@ package example.micronaut;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 
-@Controller("/conferences")
+@Controller("/conferences") // <1>
 public class ConferenceController {
 
     private final ConferenceService conferenceService;
 
-    public ConferenceController(ConferenceService conferenceService) { // <1>
+    public ConferenceController(ConferenceService conferenceService) { // <2>
         this.conferenceService = conferenceService;
     }
 
-    @Get("/random")
-    Conference randomConf() { // <2>
-        return conferenceService.randomConf(); // <3>
+    @Get("/random") // <3>
+    public Conference randomConf() { // <4>
+        return conferenceService.randomConf();
     }
 }
