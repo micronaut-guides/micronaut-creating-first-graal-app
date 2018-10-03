@@ -24,7 +24,7 @@ build the application fat-jar, generate the `reflect.json` file and build the na
 complete $ ./build-native-image.sh
 ----
 
-Once the native image is created we can start it:
+A native image named `complete` will be generated. Once the native image is created we can start it:
 
 .Executing the native image
 [source,bash]
