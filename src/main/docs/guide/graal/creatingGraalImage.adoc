@@ -21,7 +21,7 @@ build the application fat-jar, generate the `reflect.json` file and build the na
 .Building native image
 [source,bash]
 ----
-$ ./build-native-image.sh
+complete $ ./build-native-image.sh
 ----
 
 Once the native image is created we can start it:
@@ -29,7 +29,7 @@ Once the native image is created we can start it:
 .Executing the native image
 [source,bash]
 ----
-$ ./complete
+complete $ ./complete
 11:20:28.881 [main] INFO  io.micronaut.runtime.Micronaut - Startup completed in 14ms. Server Running: http://localhost:8080
 ----
 
