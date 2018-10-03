@@ -1,4 +1,12 @@
 
+Create the POJO `Conference.java`:
+
+[source,java]
+.src/main/java/example/micronaut/Conference.java
+----
+include::{sourceDir}/src/main/java/example/micronaut/Conference.java[]
+----
+
 Create a Service:
 
 [source,java]

@@ -3,8 +3,8 @@ gettingStarted:
   requirements: What you will need
   solution: Solution
 writingTheApp: Writing the App
-controller: Controller
 service: Service
+controller: Controller
 graal:
   title: Adding Graal support
   installGraal: Installing Graal

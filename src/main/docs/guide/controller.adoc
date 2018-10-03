@@ -1,16 +1,6 @@
 
-=== Create a POJO
-
-Create `Conference.java`. This is the type the controller will return and Micronaut will convert automatically to JSON
-in the respose:
-
-[source,java]
-.src/main/java/example/micronaut/Conference.java
-----
-include::{sourceDir}/src/main/java/example/micronaut/Conference.java[]
-----
-
-Create a Controller:
+Create a Controller with a method that returns a `Conference`. Micronaut will convert it automatically to JSON in the
+ response:
 
 [source,java]
 .src/main/java/example/micronaut/ConferenceController.java
