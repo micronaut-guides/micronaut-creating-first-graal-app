@@ -5,11 +5,6 @@ gettingStarted:
 writingTheApp: Writing the App
 controller: Controller
 service: Service
-#tests: Test
-#testingTheApp:
-#  title: Testing the Application
-#runningTheApp:
-#  title: Running the Application
 graal:
   title: Adding Graal support
   installGraal: Installing Graal
