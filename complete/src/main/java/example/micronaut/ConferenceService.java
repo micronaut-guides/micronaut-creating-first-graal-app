@@ -4,11 +4,12 @@ import javax.inject.Singleton;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @Singleton // <1>
 public class ConferenceService {
 
-    private List<Conference> CONFERENCES = Arrays.asList(
+    private static final List<Conference> CONFERENCES = Arrays.asList(
             new Conference("Greach"),
             new Conference("GR8Conf EU"),
             new Conference("Micronaut Summit"),
@@ -18,8 +19,7 @@ public class ConferenceService {
             new Conference("Codemotion Madrid")
     );
 
-    public Conference randomConf() {
-        Collections.shuffle(CONFERENCES);
-        return CONFERENCES.get(0); // <2>
+    public Conference randomConf() { // <2>
+        return CONFERENCES.get(new Random().nextInt(CONFERENCES.size()));
     }
 }
