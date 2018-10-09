@@ -33,7 +33,7 @@ dependencies {
     implementation "io.micronaut:runtime"
 
     //tag::graal[]
-    compileOnly "com.oracle.substratevm:svm:GraalVM-1.0.0-rc6"
+    compileOnly "com.oracle.substratevm:svm:GraalVM-1.0.0-rc7"
     runtimeOnly "io.micronaut:graal"
     //end::graal[]
 
