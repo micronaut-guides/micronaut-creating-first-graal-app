@@ -4,3 +4,4 @@
 build
 *.iml
 complete/complete
+svm.jar
