@@ -5,35 +5,36 @@ When we created the application we used the `graal-native-image` feature. This f
 
 - `svm` and `graal` dependencies in `build.gradle`:
 
+- A `Dockerfile` which can be used to construct the native image.
+
 .build.gradle
 [source,groovy]
 ----
-include::{sourceDir}/build.gradle[tag=graal]
+include::{sourceDir}/build.gradle[tag=graal,indent=0]
 ----
 
-- A `build-native-image.sh` bash script which can be used as a template to construct the native image.
 
 ==== Creating native image
 
-To create the native image the only thing we need to do is execute the `build-native-image.sh` script. The script will
-build the application fat-jar, generate the `reflect.json` file and build the native image.
-
-.Building native image
+.Building Graal native image
 [source,bash]
 ----
-complete $ ./build-native-image.sh
+$ ./gradlew assemble
+$ docker build . -t complete
 ----
 
-A native image named `complete` will be generated. Once the native image is created we can start it:
+The previous command will create the image `complete:latest`. To execute it:
 
 .Executing the native image
 [source,bash]
 ----
-complete $ ./complete
-11:20:28.881 [main] INFO  io.micronaut.runtime.Micronaut - Startup completed in 14ms. Server Running: http://localhost:8080
+$ docker run --network host complete
+10:29:46.845 [main] INFO  io.micronaut.runtime.Micronaut - Startup completed in 12ms. Server Running: http://nobita:8080
 ----
 
-We can see that the application starts in only 14ms.
+We can see that the application starts in only 12ms.
+
+TIP: We use the option `--network host` to use the same network as the host and expose automatically all the ports
 
 
 ==== Sending a request

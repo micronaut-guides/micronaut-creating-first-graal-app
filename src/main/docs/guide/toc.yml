@@ -7,6 +7,5 @@ service: Service
 controller: Controller
 graal:
   title: Adding Graal support
-  installGraal: Installing Graal
   creatingGraalImage: Creating Graal native image
 nextSteps: Next steps
