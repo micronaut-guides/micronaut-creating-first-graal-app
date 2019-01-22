@@ -1,11 +1,9 @@
-When we created the application we used the `graal-native-image` feature. This feature adds three important items:
+When we created the application we used the `graal-native-image` feature. This feature adds four important items:
 
 - A https://github.com/micronaut-guides/micronaut-creating-first-graal-app/blob/master/complete/src/main/java/example/micronaut/MicronautSubstitutions.java[MicronautSubstitutions.java]
  file needed to recompute Netty and Caffeine's use of `Unsafe`.
 
 - `svm` and `graal` dependencies in `build.gradle`:
-
-- A `Dockerfile` which can be used to construct the native image.
 
 .build.gradle
 [source,groovy]
@@ -13,14 +11,25 @@ When we created the application we used the `graal-native-image` feature. This f
 include::{sourceDir}/build.gradle[tag=graal,indent=0]
 ----
 
+- A `Dockerfile` which can be used to construct the native image executing `docker-build.sh`
 
-==== Creating native image
+- A `build-native-image.sh` script to build the native image outside Docker.
+
+
+=== Creating native image inside Docker
+
+With this approach you only need to have Docker installed because it will download the required images, if necessary.
+
+The provided `Dockerfile` is a multi-stage dockerfile which builds the project in three steps:
+
+1. A Gradle or Maven image will build the project
+2. A GraalVM official image will build the native image
+3. A typical dockerfile structure will build the final image which is smaller due to layering
 
 .Building Graal native image
 [source,bash]
 ----
-$ ./gradlew assemble
-$ docker build . -t complete
+$ ./docker-build.sh
 ----
 
 The previous command will create the image `complete:latest`. To execute it:
@@ -37,9 +46,23 @@ We can see that the application starts in only 12ms.
 TIP: We use the option `--network host` to use the same network as the host and expose automatically all the ports
 
 
-==== Sending a request
+=== Creating native image outside Docker
 
-You can run a few cURL requests to test the application:
+NOTE: For this approach you need to use Linux or Mac. As this moment GraalVM is not supported on Windows.
+
+.Building Graal native image
+[source,bash]
+----
+$ sdk use java 1.0.0-rc-11-grl
+$ ./build-native-image.sh
+----
+
+The previous commmand will create a native executable called `complete`.
+
+
+=== Sending a request
+
+Start the application either using Docker or the native executable. You can run a few cURL requests to test the application:
 
 [source,bash]
 ----
