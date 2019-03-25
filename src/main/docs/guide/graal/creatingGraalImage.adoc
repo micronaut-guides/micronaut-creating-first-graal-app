@@ -1,30 +1,29 @@
-When we created the application we used the `graal-native-image` feature. This feature adds four important items:
+When we created the application we used the `graal-native-image` feature. This feature adds three important items:
 
-- A https://github.com/micronaut-guides/micronaut-creating-first-graal-app/blob/master/complete/src/main/java/example/micronaut/MicronautSubstitutions.java[MicronautSubstitutions.java]
- file needed to recompute Netty and Caffeine's use of `Unsafe`.
-
-- `svm` and `graal` dependencies in `build.gradle`:
+1.- `svm` and `graal` dependencies in `build.gradle`:
 
 .build.gradle
 [source,groovy]
 ----
 include::{sourceDir}/build.gradle[tag=graal,indent=0]
 ----
+<1> Annotation processor to generate the `reflect` information at compile time.
 
-- A `Dockerfile` which can be used to construct the native image executing `docker-build.sh`
+2.- A `Dockerfile` which can be used to construct the native image executing `docker-build.sh`
 
-- A `build-native-image.sh` script to build the native image outside Docker.
+3.- A `native-image.properties` file in `resources/META-INF/native-image/example.micronaut/complete-application` directory with
+Graal's `native-image` configuration. This file can be used to fine tune the native-image generation.
+
+.native-image.properties
+[source]
+----
+include::{sourceDir}/src/main/resources/META-INF/native-image/example.micronaut/complete-application/native-image.properties[]
+----
 
 
 === Creating native image inside Docker
 
-With this approach you only need to have Docker installed because it will download the required images, if necessary.
-
-The provided `Dockerfile` is a multi-stage dockerfile which builds the project in three steps:
-
-1. A Gradle or Maven image will build the project
-2. A GraalVM official image will build the native image
-3. A typical dockerfile structure will build the final image which is smaller due to layering
+With this approach you only need to build the fatjar and then use Docker to build the native image.
 
 .Building Graal native image
 [source,bash]
@@ -53,8 +52,9 @@ NOTE: For this approach you need to use Linux or Mac. As this moment GraalVM is 
 .Building Graal native image
 [source,bash]
 ----
-$ sdk use java 1.0.0-rc-13-grl
-$ ./build-native-image.sh
+$ sdk use java 1.0.0-rc-14-grl
+$ ./gradlew assemble
+$ native-image --no-server -cp build/libs/complete-*.jar
 ----
 
 The previous commmand will create a native executable called `complete`.
