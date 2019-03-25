@@ -1,20 +1,10 @@
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "gradle.plugin.org.aim42:htmlSanityCheck:0.9.7"
-    }
-}
 plugins {
-    id 'org.asciidoctor.convert' version '1.5.8.1'
+    id "org.asciidoctor.convert" version "1.6.0"
+    id "org.aim42.htmlSanityCheck" version "1.1.0"
 }
-apply plugin: 'org.aim42.htmlSanityCheck'
 
 asciidoctorj {
-    version = '1.5.6'
+    version = '1.6.2'
 }
 
 apply from:"https://raw.githubusercontent.com/micronaut-projects/micronaut-guides/master/gradle/guide-build.gradle"
