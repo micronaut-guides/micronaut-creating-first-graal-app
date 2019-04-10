@@ -1,1 +1,1 @@
-Read more about https://docs.micronaut.io/1.1.0.RC1/guide/index.html#graal[Graal Support] inside Micronaut.
+Read more about https://docs.micronaut.io/latest/guide/index.html#graal[Graal Support] inside Micronaut.

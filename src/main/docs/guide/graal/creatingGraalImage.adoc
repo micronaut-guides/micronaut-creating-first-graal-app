@@ -31,12 +31,12 @@ With this approach you only need to build the fatjar and then use Docker to buil
 $ ./docker-build.sh
 ----
 
-The previous command will create the image `complete:latest`. To execute it:
+The previous command will create the image `micronaut-graal-app:latest`. To execute it:
 
 .Executing the native image
 [source,bash]
 ----
-$ docker run --network host complete
+$ docker run --network host micronaut-graal-app
 10:29:46.845 [main] INFO  io.micronaut.runtime.Micronaut - Startup completed in 12ms. Server Running: http://nobita:8080
 ----
 
@@ -52,12 +52,13 @@ NOTE: For this approach you need to use Linux or Mac. As this moment GraalVM is 
 .Building Graal native image
 [source,bash]
 ----
-$ sdk use java 1.0.0-rc-14-grl
+$ sdk use java 1.0.0-rc-15-grl
 $ ./gradlew assemble
-$ native-image --no-server -cp build/libs/complete-*.jar
+$ native-image --no-server -cp build/libs/complete-*.jar # <1>
 ----
+<1> Starting in Micronaut 1.1.0 it is really simple to create the native image
 
-The previous commmand will create a native executable called `complete`.
+The previous commmand will create a native executable called `micronaut-graal-app`.
 
 
 === Sending a request
@@ -67,7 +68,7 @@ Start the application either using Docker or the native executable. You can run 
 [source,bash]
 ----
 complete $ time curl localhost:8080/conferences/random
-{"name":"Oracle Code One"}
+{"name":"Greach"}
 real    0m0.016s
 user    0m0.005s
 sys     0m0.004s
