@@ -1,4 +1,4 @@
-FROM oracle/graalvm-ce:1.0.0-rc15 as graalvm
+FROM oracle/graalvm-ce:1.0.0-rc16 as graalvm
 COPY . /home/app/micronaut-graal-app
 WORKDIR /home/app/micronaut-graal-app
 RUN native-image --no-server -cp build/libs/complete-*.jar
