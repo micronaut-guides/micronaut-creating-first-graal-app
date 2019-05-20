@@ -1,6 +1,7 @@
-FROM oracle/graalvm-ce:1.0.0-rc16 as graalvm
+FROM oracle/graalvm-ce:19.0.0 as graalvm
 COPY . /home/app/micronaut-graal-app
 WORKDIR /home/app/micronaut-graal-app
+RUN gu install native-image
 RUN native-image --no-server -cp build/libs/complete-*.jar
 
 FROM frolvlad/alpine-glibc

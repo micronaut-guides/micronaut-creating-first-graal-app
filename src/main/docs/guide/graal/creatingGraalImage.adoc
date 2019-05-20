@@ -46,16 +46,33 @@ We can see that the application starts in only 12ms.
 
 === Creating native image outside Docker
 
-NOTE: For this approach you need to use Linux or Mac. As this moment GraalVM is not supported on Windows.
+To build your native image without using Docker you need to install GraalVM SDK via the https://www.graalvm.org/docs/getting-started/[Getting Started] instructions or using SDKman:
+
+.Installing GraalVM 19.0.0 with SDKman
+[source,bash]
+----
+$ sdk install java 19.0.0-grl
+$ sdk use java 19.0.0-grl
+----
+
+The `native-image` tool was extracted from the base GraalVM distribution. Currently it is available as an early adopter plugin. To install it, run:
+
+.Installing `native-image` tool
+[source,bash]
+----
+$ gu install native-image # <1>
+----
+<1> You only need to do that the first time to install the `native-image` tool.
+
 
 .Building Graal native image
 [source,bash]
 ----
-$ sdk use java 1.0.0-rc-16-grl
+$ sdk use java 19.0.0-grl
 $ ./gradlew assemble
 $ native-image --no-server -cp build/libs/complete-*.jar # <1>
 ----
-<1> Starting in Micronaut 1.1.0 it is really simple to create the native image
+<1> Starting in Micronaut 1.1.0 it is really simple to create the native image.
 
 The previous commmand will create a native executable called `micronaut-graal-app`.
 
