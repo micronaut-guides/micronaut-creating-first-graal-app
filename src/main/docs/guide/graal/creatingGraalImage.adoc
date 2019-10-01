@@ -74,7 +74,7 @@ $ native-image --no-server -cp build/libs/complete-*-all.jar # <1>
 ----
 <1> Starting in Micronaut 1.1.0 it is really simple to create the native image.
 
-The previous commmand will create a native executable called `micronaut-graal-app`.
+The previous command will create a native executable called `micronaut-graal-app`.
 
 
 === Sending a request

@@ -6,7 +6,7 @@ Create a POJO `Conference.java`:
 include::{sourceDir}/src/main/java/example/micronaut/Conference.java[]
 ----
 <1> Annotate the class with https://docs.micronaut.io/1.1.0.RC1/api/io/micronaut/core/annotation/Introspected.html[`@Introspected`]
-to generate `BeanIntrospection` metadata at compilation time. This information is use the render the POJO as json using Jackon
+to generate `BeanIntrospection` metadata at compilation time. This information is use the render the POJO as json using Jackson
 without using reflection.
 
 Create a Service:
