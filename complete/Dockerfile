@@ -1,4 +1,4 @@
-FROM oracle/graalvm-ce:19.2.0 as graalvm
+FROM oracle/graalvm-ce:19.2.1 as graalvm
 COPY . /home/app/micronaut-graal-app
 WORKDIR /home/app/micronaut-graal-app
 RUN gu install native-image
