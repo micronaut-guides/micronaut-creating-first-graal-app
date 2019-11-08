@@ -5,3 +5,4 @@ build
 *.iml
 complete/complete
 svm.jar
+complete/micronaut-graal-app*
