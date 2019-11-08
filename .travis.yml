@@ -3,7 +3,7 @@ addons:
   chrome: stable
 language: java
 jdk:
-  - oraclejdk8
+  - openjdk8
 sudo: required
 cache:
   directories:
