@@ -9,3 +9,5 @@ graal:
   title: Adding Graal support
   creatingGraalImage: Creating Graal native image
 nextSteps: Next steps
+help:
+  title: Help with Micronaut
