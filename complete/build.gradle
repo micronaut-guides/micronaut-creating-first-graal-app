@@ -31,7 +31,7 @@ dependencies {
     implementation "io.micronaut:micronaut-http-client"
 
     //tag::graal[]
-    compileOnly "com.oracle.substratevm:svm"
+    compileOnly "org.graalvm.nativeimage:svm"
     annotationProcessor "io.micronaut:micronaut-graal" // <1>
     //end::graal[]
 
