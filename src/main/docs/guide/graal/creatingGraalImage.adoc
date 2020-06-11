@@ -1,4 +1,4 @@
-When we created the application we used the `graal-native-image` feature. This feature adds three important items:
+When we created the application we used the `graalvm` feature. This feature adds three important items:
 
 1.- `svm` and `graal` dependencies in `build.gradle`:
 
@@ -7,7 +7,7 @@ When we created the application we used the `graal-native-image` feature. This f
 ----
 include::{sourceDir}/build.gradle[tag=graal,indent=0]
 ----
-<1> Annotation processor to generate the `reflect` information at compile time.
+<1> Annotation processor to generate the `reflection` and `resources` information at compile time.
 
 2.- A `Dockerfile` which can be used to construct the native image executing `docker-build.sh`
 
@@ -48,11 +48,11 @@ We can see that the application starts in only 12ms.
 
 To build your native image without using Docker you need to install GraalVM SDK via the https://www.graalvm.org/docs/getting-started/[Getting Started] instructions or using SDKman:
 
-.Installing GraalVM 20.0.0 with SDKman
+.Installing GraalVM 20.1.0 with SDKman
 [source,bash]
 ----
-$ sdk install java 20.0.0.r8-grl
-$ sdk use java 20.0.0.r8-grl
+$ sdk install java 20.1.0.r8-grl
+$ sdk use java 20.1.0.r8-grl
 ----
 
 The `native-image` tool was extracted from the base GraalVM distribution. Currently it is available as an early adopter plugin. To install it, run:
@@ -68,7 +68,7 @@ $ gu install native-image # <1>
 .Building Graal native image
 [source,bash]
 ----
-$ sdk use java 20.0.0.r8-grl
+$ sdk use java 20.1.0.r8-grl
 $ ./gradlew assemble
 $ native-image --no-server -cp build/libs/complete-*-all.jar # <1>
 ----

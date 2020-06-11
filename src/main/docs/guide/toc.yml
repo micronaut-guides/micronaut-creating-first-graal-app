@@ -6,8 +6,8 @@ writingTheApp: Writing the App
 service: Service
 controller: Controller
 graal:
-  title: Adding Graal support
-  creatingGraalImage: Creating Graal native image
+  title: Adding GraalVM support
+  creatingGraalImage: Creating GraalVM native image
 nextSteps: Next steps
 help:
   title: Help with Micronaut
