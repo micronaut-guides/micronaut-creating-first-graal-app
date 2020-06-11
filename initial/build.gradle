@@ -9,7 +9,6 @@ group "example"
 
 repositories {
     jcenter()
-    maven { url "https://oss.jfrog.org/oss-snapshot-local" }
 }
 
 configurations {
