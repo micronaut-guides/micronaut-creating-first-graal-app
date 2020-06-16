@@ -1,1 +1,3 @@
-In this guide we are going to create a Micronaut application with https://www.graalvm.org/[Graal] support.
+include::{commondir}/common-micronautonex.adoc[]
+
+In this guide we are going to create a Micronaut application with https://www.graalvm.org/[GraalVM] support.
