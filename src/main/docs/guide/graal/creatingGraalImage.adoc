@@ -1,61 +1,19 @@
-When we created the application we used the `graalvm` feature. This feature adds three important items:
-
-1.- `svm` and `graal` dependencies in `build.gradle`:
-
-.build.gradle
-[source,groovy]
-----
-include::{sourceDir}/build.gradle[tag=graal,indent=0]
-----
-<1> Annotation processor to generate the `reflection` and `resources` information at compile time.
-
-2.- A `Dockerfile` which can be used to construct the native image executing `docker-build.sh`
-
-3.- A `native-image.properties` file in `resources/META-INF/native-image/example.micronaut/complete-application` directory with
-Graal's `native-image` configuration. This file can be used to fine tune the native-image generation.
-
-.native-image.properties
-[source]
-----
-include::{sourceDir}/src/main/resources/META-INF/native-image/example.micronaut/complete-application/native-image.properties[]
-----
+The GraalVM support has been improved in Micronaut 2.1.0 with the new https://github.com/micronaut-projects/micronaut-gradle-plugin[Micronaut Gradle Plugin]
+so now everything is configured by the plugin and you don't need to do anything to your application or select the
+`graalvm` feature when creating the application.
 
 
-=== Creating native image inside Docker
+=== Installing GraalVM
 
-With this approach you only need to build the fatjar and then use Docker to build the native image.
-
-.Building Graal native image
-[source,bash]
-----
-$ ./gradlew assemble
-$ ./docker-build.sh
-----
-
-The previous command will create the image `micronaut-graal-app:latest`. To execute it:
-
-.Executing the native image
-[source,bash]
-----
-$ docker run -p 8080:8080 micronaut-graal-app
-10:29:46.845 [main] INFO  io.micronaut.runtime.Micronaut - Startup completed in 12ms. Server Running: http://localhost:8080
-----
-
-We can see that the application starts in only 12ms.
-
-
-=== Creating native image outside Docker
-
-To build your native image without using Docker you need to install GraalVM SDK via the https://www.graalvm.org/docs/getting-started/[Getting Started] instructions or using SDKman:
+The first step is installing GraalVM via the https://www.graalvm.org/docs/getting-started/[Getting Started] instructions or using SDKman:
 
 .Installing GraalVM 20.2.0 with SDKman
 [source,bash]
 ----
-$ sdk install java 20.2.0.r8-grl
-$ sdk use java 20.2.0.r8-grl
+$ sdk install java 20.2.0.r8-grl # or 20.2.0.r11-grl for JDK 11
 ----
 
-The `native-image` tool was extracted from the base GraalVM distribution. Currently it is available as an early adopter plugin. To install it, run:
+The `native-image` tool was extracted from the base GraalVM distribution. Currently, it is available as an early adopter plugin. To install it, run:
 
 .Installing `native-image` tool
 [source,bash]
@@ -65,16 +23,56 @@ $ gu install native-image # <1>
 <1> You only need to do that the first time to install the `native-image` tool.
 
 
+=== Creating native image outside Docker
+
+To build your native image without using Docker is now really simple:
+
 .Building Graal native image
 [source,bash]
 ----
 $ sdk use java 20.2.0.r8-grl
-$ ./gradlew assemble
-$ native-image -cp build/libs/complete-*-all.jar # <1>
-----
-<1> Starting in Micronaut 1.1.0 it is really simple to create the native image.
 
-The previous command will create a native executable called `micronaut-graal-app`.
+$ ./gradlew nativeImage
+----
+
+The previous command will create the native executable `build/native-image/application`.
+
+It is also possible to customize the name of the native image or pass additional parameters to GraalVM:
+
+.build.gradle
+[source,groovy]
+----
+nativeImage {
+    args('--verbose')
+    imageName('micronaut-graalvm-app') // <1>
+}
+----
+<1> The native image name will now be `micronaut-graalvm-app`
+
+
+=== Creating native image inside Docker
+
+The output following this approach is a docker image that runs the native image of your application. You don't need to install
+any additional dependency.
+
+.Building Graal native image
+[source,bash]
+----
+$ sdk use java 20.2.0.r8-grl
+
+$ ./gradlew dockerBuildNative
+----
+
+The previous command will create the image `complete:latest`. To execute it:
+
+.Executing the native image
+[source,bash]
+----
+$ docker run -p 8080:8080 complete
+10:29:46.845 [main] INFO  io.micronaut.runtime.Micronaut - Startup completed in 12ms. Server Running: http://localhost:8080
+----
+
+We can see that the application starts in only 12ms.
 
 
 === Sending a request
@@ -96,3 +94,5 @@ user    0m0.005s
 sys     0m0.004s
 
 ----
+
+NOTE: For more information about the new Micronaut Gradle plugin, take a look at https://github.com/micronaut-projects/micronaut-gradle-plugin[the documentation].
