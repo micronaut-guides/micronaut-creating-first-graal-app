@@ -5,7 +5,7 @@ Create an app using the Micronaut Command Line Interface.
 mn create-app example.micronaut.complete
 ----
 
-NOTE: Starting with Micronaut 2.1.0, if you use Gradle you don't need to select the `graalvm` feature anymore.
+NOTE: Starting with Micronaut 2.2.0 you don't need to select the `graalvm` feature anymore.
 
 The previous command creates a Micronaut app with the default package `example.micronaut` in a folder named `complete` and with support for GraalVM.
 
