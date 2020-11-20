@@ -1,16 +1,20 @@
-The GraalVM support has been improved in Micronaut 2.1.0 with the new https://github.com/micronaut-projects/micronaut-gradle-plugin[Micronaut Gradle Plugin]
-so now everything is configured by the plugin and you don't need to do anything to your application or select the
+The GraalVM support has been improved in Micronaut 2.2.0 with a new https://micronaut-projects.github.io/micronaut-maven-plugin/latest/index.html[Micronaut Maven Plugin]
+and Micronaut 2.1.0 already included a https://github.com/micronaut-projects/micronaut-gradle-plugin[Micronaut Gradle Plugin].
+
+Now everything is configured by the plugins and you don't need to do anything to your application or select the
 `graalvm` feature when creating the application.
 
+NOTE: This guide uses Gradle but it contains instructions for using the Maven plugin. To create the application with Maven
+support run: `mn create-app hello-world --build maven`.
 
 === Installing GraalVM
 
 The first step is installing GraalVM via the https://www.graalvm.org/docs/getting-started/[Getting Started] instructions or using SDKman:
 
-.Installing GraalVM 20.2.0 with SDKman
+.Installing GraalVM 20.3.0 with SDKman
 [source,bash]
 ----
-$ sdk install java 20.2.0.r8-grl # or 20.2.0.r11-grl for JDK 11
+$ sdk install java 20.3.0.r8-grl # or 20.3.0.r11-grl for JDK 11
 ----
 
 The `native-image` tool was extracted from the base GraalVM distribution. Currently, it is available as an early adopter plugin. To install it, run:
@@ -30,12 +34,20 @@ To build your native image without using Docker is now really simple:
 .Building Graal native image
 [source,bash]
 ----
-$ sdk use java 20.2.0.r8-grl
+$ sdk use java 20.3.0.r8-grl
 
 $ ./gradlew nativeImage
 ----
 
-The previous command will create the native executable `build/native-image/application`.
+Or if you use Maven:
+[source,bash]
+----
+$ sdk use java 20.3.0.r8-grl
+
+$ ./mvnw package -Dpackaging=native-image
+----
+
+The previous command will create the native executable in `build/native-image` directory (or in `target` if you use Maven).
 
 It is also possible to customize the name of the native image or pass additional parameters to GraalVM:
 
@@ -44,7 +56,7 @@ It is also possible to customize the name of the native image or pass additional
 ----
 nativeImage {
     args('--verbose')
-    imageName('micronaut-graalvm-app') // <1>
+    imageName('hello-world') // <1>
 }
 ----
 <1> The native image name will now be `micronaut-graalvm-app`
@@ -58,12 +70,16 @@ any additional dependency.
 .Building Graal native image
 [source,bash]
 ----
-$ sdk use java 20.2.0.r8-grl
-
 $ ./gradlew dockerBuildNative
 ----
 
-The previous command will create the image `complete:latest`. To execute it:
+.Building Graal native image with Maven
+[source,bash]
+----
+$ ./mvnw package -Dpackaging=docker-native
+----
+
+The previous command will create the image `hello-world:latest`. To execute it:
 
 .Executing the native image
 [source,bash]
@@ -95,4 +111,5 @@ sys     0m0.004s
 
 ----
 
-NOTE: For more information about the new Micronaut Gradle plugin, take a look at https://github.com/micronaut-projects/micronaut-gradle-plugin[the documentation].
+NOTE: For more information about the new plugins take a look at the https://github.com/micronaut-projects/micronaut-gradle-plugin[Micronaut Gradle plugin]
+and https://micronaut-projects.github.io/micronaut-maven-plugin/latest/index.html[Micronaut Maven Plugin] documentation.
