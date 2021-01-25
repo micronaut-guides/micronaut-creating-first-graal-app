@@ -11,10 +11,10 @@ support run: `mn create-app hello-world --build maven`.
 
 The first step is installing GraalVM via the https://www.graalvm.org/docs/getting-started/[Getting Started] instructions or using SDKman:
 
-.Installing GraalVM 20.3.0 with SDKman
+.Installing GraalVM 21.0.0 with SDKman
 [source,bash]
 ----
-$ sdk install java 20.3.0.r8-grl # or 20.3.0.r11-grl for JDK 11
+$ sdk install java 21.0.0.r8-grl # or 21.0.0.r11-grl for JDK 11
 ----
 
 The `native-image` tool was extracted from the base GraalVM distribution. Currently, it is available as an early adopter plugin. To install it, run:
@@ -34,7 +34,7 @@ To build your native image without using Docker is now really simple:
 .Building Graal native image
 [source,bash]
 ----
-$ sdk use java 20.3.0.r8-grl
+$ sdk use java 21.0.0.r8-grl
 
 $ ./gradlew nativeImage
 ----
@@ -42,7 +42,7 @@ $ ./gradlew nativeImage
 Or if you use Maven:
 [source,bash]
 ----
-$ sdk use java 20.3.0.r8-grl
+$ sdk use java 21.0.0.r8-grl
 
 $ ./mvnw package -Dpackaging=native-image
 ----
